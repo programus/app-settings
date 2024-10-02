@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Default Bookmark Guid</key>
-	<string>309B6F70-7C8D-467B-B90C-1469C54433A0</string>
+	<string>CD7023A5-569A-449D-8219-B6D999A190A6</string>
 	<key>EnableAPIServer</key>
 	<true/>
 	<key>HapticFeedbackForEsc</key>
@@ -1207,7 +1207,7 @@
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Open Toolbelt</key>
-			<true/>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1353,7 +1353,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>2</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/wangyuan</string>
 		</dict>
@@ -2084,7 +2084,7 @@
 			<key>HotKey Key Code</key>
 			<integer>49</integer>
 			<key>HotKey Modifier Activation</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>HotKey Modifier Flags</key>
 			<integer>524288</integer>
 			<key>HotKey Window Animates</key>
