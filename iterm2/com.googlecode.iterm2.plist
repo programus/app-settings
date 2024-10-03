@@ -8,6 +8,8 @@
 	<string>CD7023A5-569A-449D-8219-B6D999A190A6</string>
 	<key>EnableAPIServer</key>
 	<true/>
+	<key>ForceKeyboard</key>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideMenuBarInFullscreen</key>
