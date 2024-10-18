@@ -27,7 +27,7 @@ set -g history-limit 100000                 # boost history
 # new window retains current path, possible values are:
 #   - true
 #   - false (default)
-tmux_conf_new_window_retain_current_path=false
+tmux_conf_new_window_retain_current_path=true
 
 # new pane retains current path, possible values are:
 #   - true (default)
@@ -395,7 +395,7 @@ set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @plugin 'tmux-plugins/tmux-urlview'
 
 #set -g @resurrect-save-shell-history 'on'
-#set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
 
 set -g @prefix_highlight_empty_has_affixes 'on' # default is 'off'
