@@ -33,6 +33,34 @@ spoon.QuickRef:bindHotKeys({
 	show_pasteboard = { { "ctrl", "cmd" }, "P" },
 })
 
+-- Auto turn on/off display
+watcher = hs.caffeinate.watcher.new(function(eventType)
+	local level = "8-1.3"
+	local port = "4"
+	local run = false
+	local onoff = ""
+	if eventType == hs.caffeinate.watcher.screensDidWake then
+		onoff = "on"
+		run = true
+	elseif eventType == hs.caffeinate.watcher.screensDidSleep then
+		onoff = "off"
+		run = true
+	end
+	if run then
+		hs.execute(
+			"/opt/homebrew/bin/uhubctl -a "
+				.. onoff
+				.. " -l "
+				.. level
+				.. " -p "
+				.. port
+				.. " >> /tmp/hs_uhubctl.log 2>> /tmp/hs_uhubctl.error",
+			false
+		)
+	end
+end)
+watcher:start()
+
 -- Disable switch kitty since switched back to iTerm2
 -- -- Switch kitty
 -- hs.hotkey.bind({'alt'}, 'space', function ()
