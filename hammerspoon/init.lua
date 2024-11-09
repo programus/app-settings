@@ -13,6 +13,13 @@ function Dump(o)
 	end
 end
 
+function commandExists(cmd)
+	local handle = io.popen("command -v " .. cmd .. " >/dev/null 2>&1 && echo exists || echo not_exists")
+	local result = handle:read("*a")
+	handle:close()
+	return result:match("exists") ~= nil
+end
+
 -- -- Switch hosts
 -- hs.network.reachability.forHostName('home.pi'):setCallback(function(self, flags)
 --   if (flags & hs.network.reachability.flags.reachable) > 0 then
@@ -33,20 +40,17 @@ spoon.QuickRef:bindHotKeys({
 	show_pasteboard = { { "ctrl", "cmd" }, "P" },
 })
 
+-- Cmd-L to sleep
+hs.hotkey.bind({ "cmd" }, "L", function()
+	hs.caffeinate.lockScreen()
+end)
+
 -- Auto turn on/off display
-watcher = hs.caffeinate.watcher.new(function(eventType)
-	local level = "8-1.3"
-	local port = "4"
-	local run = false
-	local onoff = ""
-	if eventType == hs.caffeinate.watcher.screensDidWake then
-		onoff = "on"
-		run = true
-	elseif eventType == hs.caffeinate.watcher.screensDidSleep then
-		onoff = "off"
-		run = true
-	end
-	if run then
+if commandExists("/opt/homebrew/bin/uhubctl") then
+	local function powerMonitor(onoff)
+		local level = "8-1.3"
+		local port = "4"
+		local file_name = os.date("/tmp/hs_uhubctl-%Y%m%d%H%M%S")
 		hs.execute(
 			"/opt/homebrew/bin/uhubctl -a "
 				.. onoff
@@ -54,12 +58,30 @@ watcher = hs.caffeinate.watcher.new(function(eventType)
 				.. level
 				.. " -p "
 				.. port
-				.. " >> /tmp/hs_uhubctl.log 2>> /tmp/hs_uhubctl.error",
+				.. " >> "
+				.. file_name
+				.. ".log 2>> "
+				.. file_name
+				.. ".error",
 			false
 		)
 	end
-end)
-watcher:start()
+	watcher = hs.caffeinate.watcher.new(function(eventType)
+		local run = false
+		local onoff = ""
+		if eventType == hs.caffeinate.watcher.screensDidWake then
+			onoff = "on"
+			run = true
+		elseif eventType == hs.caffeinate.watcher.screensDidSleep then
+			onoff = "off"
+			run = true
+		end
+		if run then
+			powerMonitor(onoff)
+		end
+	end)
+	watcher:start()
+end
 
 -- Disable switch kitty since switched back to iTerm2
 -- -- Switch kitty
