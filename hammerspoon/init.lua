@@ -20,6 +20,14 @@ function commandExists(cmd)
 	return result:match("exists") ~= nil
 end
 
+-- select window: https://github.com/dmgerman/hs_select_window.spoon
+hs.loadSpoon("hs_select_window")
+local SWbindings = {
+	all_windows = { { "ctrl", "cmd" }, "L" },
+	app_windows = { { "ctrl", "cmd" }, "I" },
+}
+spoon.hs_select_window:bindHotkeys(SWbindings)
+
 -- -- Switch hosts
 -- hs.network.reachability.forHostName('home.pi'):setCallback(function(self, flags)
 --   if (flags & hs.network.reachability.flags.reachable) > 0 then

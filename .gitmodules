@@ -7,3 +7,6 @@
 [submodule "hammerspoon/my-spoons"]
 	path = hammerspoon/my-spoons
 	url = git@github.com:programus/spoons.git
+[submodule "hammerspoon/Spoons/hs_select_window.spoon"]
+	path = hammerspoon/Spoons/hs_select_window.spoon
+	url = https://github.com/dmgerman/hs_select_window.spoon.git
